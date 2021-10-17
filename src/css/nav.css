@@ -75,6 +75,7 @@
 
 .title-bar{
   font-family: 'Prompt';
+  font-weight: 700;
   font-size: xx-large;
   color: whitesmoke;
 }

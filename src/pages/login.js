@@ -13,7 +13,7 @@ function Login({user, setUser}){
         return <Redirect to={redirect}/>
     }
     return (
-        <div className="home-page background">
+        <div className="home-page background fullsize">
             <div className="logobox">
             </div>
             <div className="flex-row">

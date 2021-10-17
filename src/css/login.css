@@ -12,3 +12,7 @@
 .space{
     margin-top: 3rem;
 }
+
+.fullsize{
+    height: 100vh;
+}

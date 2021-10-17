@@ -21,7 +21,7 @@ function App() {
     <Router>
       <Navbar user={userTmp} setUser={setUser}></Navbar>
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" component={() => <Home user={userTmp}/>} />
         <Route exact path="/login" component={() => <SignInPage user={user} setUser={setUser}/>} />
         <Route exact path="/logout" component={() => <Logout setuser={setUser}/>} />
         <PrivateRoute exact path="/feed" user={userTmp} component={() => <Feed user={userTmp} />} />

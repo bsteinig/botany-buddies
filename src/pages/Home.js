@@ -2,7 +2,7 @@ import React from 'react'
 import '../css/home.css';
 import acorn from '../images/acorn_branch.png'
 
-function Home() {
+function Home({user}){
     return (
         <div className="background extrastuff">
             <div class="block">
@@ -10,7 +10,11 @@ function Home() {
             </div>
             <h1 className="top-title">together</h1>
             <p className="third">Join an engaging community of plant parents today.</p>
-            <a className="loginbtn" href="/login">start planting</a>
+            {user ?
+                <a className="loginbtn" href="/profile">start planting</a>
+            :
+                <a className="loginbtn" href="/login">start planting</a>
+            }
             <img src={acorn} alt="hero" class="hero"/>
         </div>
     )

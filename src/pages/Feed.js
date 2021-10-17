@@ -27,7 +27,6 @@ function Feed({user}) {
     const onLike = (postName) => {
         const newPost = {...posts[postName]}
         const newPosts = {...posts};
-
         if(newPost.usersLiked && newPost.usersLiked.includes(user.uid)){
             const index = newPost.usersLiked.indexOf(user.uid);
             if (index > -1) {
@@ -50,7 +49,7 @@ function Feed({user}) {
     return (
         <div className="insta background extramargin">
             {
-                Object.keys(posts).map(post => 
+                Object.keys(posts).reverse().map(post => 
                     <Post user={user} key={post} post={posts[post]} postName={post} onPostLike={onLike} page={'feed'}/>
                 )
             }

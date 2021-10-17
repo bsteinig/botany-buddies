@@ -10,7 +10,7 @@ function Post({user, post, postName, onPostLike, page}) {
 	var interval = seconds / 31536000;
 	var blah = "hello";
 	if (interval > 1) {
-		if(interval = 1){
+		if(interval == 1){
 			blah = Math.floor(interval) + " year ago";
 		}
 		else{
@@ -19,7 +19,7 @@ function Post({user, post, postName, onPostLike, page}) {
 	}
 	interval = seconds / 2592000;
 	if (seconds < 60*60*24*7*12) {
-		if(interval = 1){
+		if(interval == 1){
 			blah = Math.floor(interval) + " month ago";
 		}
 		else{
@@ -28,7 +28,7 @@ function Post({user, post, postName, onPostLike, page}) {
 	}
 	interval = seconds / 86400;
 	if (seconds < 60*60*24*7) {
-		if(interval = 1){
+		if(interval == 1){
 			blah = Math.floor(interval) + " day ago";
 		}
 		else{
@@ -37,7 +37,7 @@ function Post({user, post, postName, onPostLike, page}) {
 	}
 	interval = seconds / 3600;
 	if (seconds < 60*60*24) {
-		if(interval = 1){
+		if(interval == 1){
 			blah = Math.floor(interval) + " hour ago";
 		}
 		else{
@@ -46,7 +46,7 @@ function Post({user, post, postName, onPostLike, page}) {
 	}
 	interval = seconds / 60;
 	if (seconds < 60*60) {
-		if(interval = 1){
+		if(interval == 1){
 			blah = Math.floor(interval) + " minute ago";
 		}
 		else{
@@ -54,7 +54,7 @@ function Post({user, post, postName, onPostLike, page}) {
 		}
 	}
 	if(seconds < 60){
-		if(interval = 1){
+		if(interval == 1){
 			blah = Math.floor(interval) + " second ago";
 		}
 		else{

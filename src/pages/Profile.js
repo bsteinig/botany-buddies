@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { storage, newImage, getImages, writePost, getUserPosts, updatePost } from '../database/firebase'
+import Loader from 'react-spinner-loader'
 import Post from '../components/Post';
 
 function Profile({user}) {
@@ -14,6 +15,7 @@ function Profile({user}) {
 
     const [posts, setPosts] = useState({});
     const [pulled, setPulled] = useState(false);
+    const [spinner, setSpinner] = useState(false);
 
     var dateObj = new Date(user.metadata.creationTime);
     var month = dateObj.getMonth();
@@ -69,6 +71,7 @@ function Profile({user}) {
                     console.log(url)
                     newImage(user, url);
                     setFile(null);
+                    setSpinner(false)
                     callback(url);
                 })
             }
@@ -77,6 +80,7 @@ function Profile({user}) {
     };
 
     const handleFormSubmit = () => {
+        setSpinner(true);
         handleImageSubmit(url => {
             newPost(url);
         })
@@ -113,36 +117,54 @@ function Profile({user}) {
                 </div>
                 <div className="text-box">
                     <h1 className="name">{user.displayName}</h1>
-                    <p className="sub-head">joined: <span className="date">{monthNames[month]}&nbsp;{year}</span></p>
+                    <p className="sub-head">joined <span className="date">{monthNames[month]}&nbsp;{year}</span></p>
                 </div>
             </div>
             {create ?
-                <div class="post-creation">
-                    <h1 class="title-bar">Introduce a new plant!</h1>
-                    <div className='file-in'>  
-                        <input type='file' className='input-file'
-                        onChange={handleImageAsFile}/>
+                <div className="post-creation">
+                    {  spinner ?
+                        <div className="spinner">
+                            <Loader
+                                type="Rings"
+                                color="#0f9bd1"
+                                height={150}
+                                width={150}
+                                visible={true}
+                                style={{display:'flex', justifyContent:'center', marginTop:'1rem' }}
+                            />  
+                        </div>  
+                    :
+                    <div className="flex">
+                        <button onClick={() => {setCreate(!create)}} className="btn btn-x"><i className="fas fa-times-circle"></i></button>
+                        <h1 className="title-bar">Introduce a new plant!</h1>
+                        <div className='file-in'>  
+                            image:
+                            <input type='file' className='input-file'
+                            onChange={handleImageAsFile}/>
+                        </div>
+                        <div className="text-in">
+                            caption: 
+                            <input type="text" className="input-text"
+                            value={caption} onChange={(e) => setCaption(e.target.value)}/>
+                        </div>
+                        <button className="submit-btn" onClick={handleFormSubmit}>
+                        Import
+                        </button>
                     </div>
-                    <div class="text-in">
-                        <input type="text" class="input-text"
-                        value={caption} onChange={(e) => setCaption(e.target.value)}/>
-                    </div>
-                    <button className="submit-btn" onClick={handleFormSubmit}>
-                    Import
-                    </button>
+                    }
                 </div>
             :
                 <div className='spacer-new'>
                     <button onClick={() => {setCreate(!create)}} className="btn btn-plus"><i className="fas fa-plus-circle"></i></button>
                 </div>
             }
-
+            <div className="grid">
             {
-                Object.keys(posts).map(post => 
+                Object.keys(posts).reverse().map(post => 
                     <Post user={user} key={post} post={posts[post]} postName={post} onPostLike={onLike} page={'pro'}/>
                 )
             }
-            
+            </div>
             
         </div>
     )
