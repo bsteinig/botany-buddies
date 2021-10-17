@@ -67,7 +67,15 @@ export const writePost = (data) => {
   console.log(data);
 }
 
-export const getPost = (user, callback) => {
+export const updatePost = (postName, data) => {
+  var defaultDatabase = firebase.database();
+  let ref = defaultDatabase.ref("/")
+  let newWorkout = ref.child(`posts/${data.user}/${postName}`);
+  newWorkout.set(data)
+  console.log(data);
+}
+
+export const getUserPosts = (user, callback) => {
   var defaultDatabase = firebase.database();
   let ref = defaultDatabase.ref("/");
   let posts = ref.child(`posts/${user.uid}`);
@@ -79,6 +87,19 @@ export const getPost = (user, callback) => {
   //   this.setState(state);
   // });
 };
+
+export const getAllPosts = (callback) => {
+  var defaultDatabase = firebase.database();
+  let ref = defaultDatabase.ref("/");
+  let posts = ref.child(`posts`);
+  var allPosts = [];
+  posts.on('value', (snapshot) => {
+    // snapshot.val().forEach(post => {
+    //   console.log(post);
+    // })
+    callback(snapshot.val());
+  })
+}
 
 export const newImage = (user, imgLink) => {
   var defaultDatabase = firebase.database();

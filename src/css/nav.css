@@ -12,10 +12,16 @@
 .nav{
     display: flex;
     justify-content: flex-end !important;
+    z-index: 2;
 }
 .navbar-custom { 
     background-color: var(--black); 
     color: var(--white);
+    position: fixed;
+    width: 100vw;
+    z-index: 2;
+    top: 0;
+    left: 0;
 } 
 
 .active-custom a {
@@ -86,5 +92,11 @@
 }
 
 .btn-secondary{
-  background-color: #cfcfcf;
+  background-color:#3a4b44;
+  color: #7f9e99;
+}
+
+.btn-secondary:hover{
+  background-color: #7f9e99;
+  color: #3a4b44;
 }

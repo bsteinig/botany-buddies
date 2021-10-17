@@ -1,6 +1,7 @@
 import React, {useEffect, useState, useContext} from 'react' 
 import { Redirect } from 'react-router-dom'
 import { signInWithGoogle, logOut } from '../database/firebase'
+import '../css/login.css';
 
 function Login({user, setUser}){
     // const user = useContext(UserContext)
@@ -12,11 +13,11 @@ function Login({user, setUser}){
         return <Redirect to={redirect}/>
     }
     return (
-        <div className="home-page">
+        <div className="home-page background">
             <div className="logobox">
             </div>
-            <div className="row">
-                <div className="col-md-12"> <button onClick={() => {signInWithGoogle(setUser)}} className="btn btn-lg btn-google btn-block text-uppercase btn-outline"><img src="https://img.icons8.com/color/16/000000/google-logo.png"></img> Signup Using Google</button> </div>
+            <div className="flex-row">
+                <div className="space"> <button onClick={() => {signInWithGoogle(setUser)}} className="loginbtn"><img src="https://img.icons8.com/color/16/000000/google-logo.png"></img> Login with Google</button> </div>
             </div>
         </div>
     );
@@ -24,7 +25,7 @@ function Login({user, setUser}){
 
 export function Logout({setuser}){
     // const user = useContext(UserContext)
-    const [redirect, setredirect] = useState("/logout")
+    const [redirect, setredirect] = useState("/")
 
     useEffect(() => {
         logOut(setuser);
